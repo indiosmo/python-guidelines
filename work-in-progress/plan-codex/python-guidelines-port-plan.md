@@ -7,11 +7,11 @@ guides to produce. It does not carry the full guide content.
 ## Inputs
 
 - `work-in-progress/consolidation-codex/research-consolidation.md`
-- `work-in-progress/exploration/design-codex/generalizable-cpp-design.md`
-- `work-in-progress/exploration/testing-debugging-codex/generalizable-cpp-testing-debugging.md`
-- `work-in-progress/exploration/factors2-codex/architecture-and-patterns.md`
-- `work-in-progress/exploration/factors2-codex/tooling-tests-docs.md`
-- `work-in-progress/exploration/research-codex/modern-python-tooling-and-typing.md`
+- `work-in-progress/exploration/codex-research/generalizable-cpp-design.md`
+- `work-in-progress/exploration/codex-research/generalizable-cpp-testing-debugging.md`
+- `work-in-progress/exploration/codex-research/architecture-and-patterns.md`
+- `work-in-progress/exploration/codex-research/tooling-tests-docs.md`
+- `work-in-progress/exploration/codex-research/modern-python-tooling-and-typing.md`
 - `work-in-progress/exploration/cpp-codex/00-summary.md`
 - `work-in-progress/exploration/cpp-codex/design/*.md`
 - `work-in-progress/exploration/cpp-codex/research/modern-python-tooling.md`
@@ -45,8 +45,8 @@ commands, benchmark separation, and packaging metadata checks.
 Use:
 
 - `MONOREPO.md`
-- `factors2-codex/tooling-tests-docs.md`
-- `research-codex/modern-python-tooling-and-typing.md`
+- `codex-research/tooling-tests-docs.md`
+- `codex-research/modern-python-tooling-and-typing.md`
 - `cpp-claude/research/ruff-rule-sets.md`
 - `cpp-claude/research/typecheckers-2026.md`
 
@@ -60,8 +60,8 @@ integration edges.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `factors2-codex/architecture-and-patterns.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/architecture-and-patterns.md`
 - `cpp-claude/design/architecture.md`
 - `cpp-claude/design/pipelines.md`
 
@@ -76,9 +76,9 @@ dynamic where static typing adds ceremony without safety.
 
 Use:
 
-- `research-codex/modern-python-tooling-and-typing.md`
-- `design-codex/generalizable-cpp-design.md`
-- `factors2-codex/architecture-and-patterns.md`
+- `codex-research/modern-python-tooling-and-typing.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/architecture-and-patterns.md`
 - `cpp-claude/design/compile-time-correctness.md`
 - `cpp-claude/research/strong-types-and-data-classes.md`
 - `cpp-claude/research/pep695-and-generics.md`
@@ -94,8 +94,8 @@ when a visible sequence is clearer.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `factors2-codex/architecture-and-patterns.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/architecture-and-patterns.md`
 - `cpp-claude/design/declarative-style.md`
 - `cpp-claude/design/functional-programming.md`
 - `cpp-claude/design/performance.md`
@@ -110,8 +110,8 @@ strategies; and dynamic dispatch only as a deliberate adapter boundary.
 
 Use:
 
-- `factors2-codex/architecture-and-patterns.md`
-- `research-codex/modern-python-tooling-and-typing.md`
+- `codex-research/architecture-and-patterns.md`
+- `codex-research/modern-python-tooling-and-typing.md`
 - `cpp-claude/design/templates.md`
 - `cpp-claude/design/preprocessor-macros.md`
 - `cpp-claude/research/exhaustive-matching.md`
@@ -126,9 +126,9 @@ rollback and cleanup.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `testing-debugging-codex/generalizable-cpp-testing-debugging.md`
-- `factors2-codex/architecture-and-patterns.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/generalizable-cpp-testing-debugging.md`
+- `codex-research/architecture-and-patterns.md`
 - `cpp-claude/design/error-handling.md`
 - `cpp-claude/design/invariants.md`
 
@@ -142,8 +142,8 @@ SQL or structured text, and isolation for process-global state.
 
 Use:
 
-- `testing-debugging-codex/generalizable-cpp-testing-debugging.md`
-- `factors2-codex/tooling-tests-docs.md`
+- `codex-research/generalizable-cpp-testing-debugging.md`
+- `codex-research/tooling-tests-docs.md`
 - `cpp-claude/testing/philosophy.md`
 - `cpp-claude/testing/test-patterns.md`
 - `cpp-claude/testing/test-helpers.md`
@@ -162,7 +162,7 @@ checker, Ruff, pytest warnings policy, `python -X dev`, asyncio debug mode,
 
 Use:
 
-- `testing-debugging-codex/generalizable-cpp-testing-debugging.md`
+- `codex-research/generalizable-cpp-testing-debugging.md`
 - `cpp-claude/debugging/root-cause-tracing.md`
 - `cpp-claude/debugging/defense-in-depth.md`
 - `cpp-claude/debugging/logging.md`
@@ -179,8 +179,8 @@ for classes tied to a loop or thread.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `testing-debugging-codex/generalizable-cpp-testing-debugging.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/generalizable-cpp-testing-debugging.md`
 - `cpp-claude/design/runtime.md`
 - `cpp-claude/design/pipelines.md`
 - `cpp-claude/research/structured-concurrency.md`
@@ -195,9 +195,9 @@ tools but do not speed CPython execution by themselves.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `factors2-codex/architecture-and-patterns.md`
-- `factors2-codex/tooling-tests-docs.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/architecture-and-patterns.md`
+- `codex-research/tooling-tests-docs.md`
 - `cpp-claude/design/performance.md`
 
 ### `python-style/comments-and-documentation.md`
@@ -210,8 +210,8 @@ entry points, and avoid starter-template content.
 
 Use:
 
-- `design-codex/generalizable-cpp-design.md`
-- `factors2-codex/tooling-tests-docs.md`
+- `codex-research/generalizable-cpp-design.md`
+- `codex-research/tooling-tests-docs.md`
 - `cpp-claude/design/comments.md`
 - project `AGENTS.md` instructions
 
