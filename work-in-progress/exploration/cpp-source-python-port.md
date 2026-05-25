@@ -10,11 +10,10 @@ guide writing.
 
 Sources consolidated:
 
-- `work-in-progress/exploration/cpp-codex/`: narrative summary, per-guide
-  analyses, and modern Python tooling notes.
-- `work-in-progress/exploration/cpp-claude/`: stricter file mapping,
-  section-level dispositions, agent-context mapping, and Python-specific
-  research notes.
+- Codex's narrative summary, per-guide analyses, and modern Python tooling
+  notes.
+- Claude's stricter file mapping, section-level dispositions, agent-context
+  mapping, and Python-specific research notes.
 
 The analysis covers every requested C++ source guide:
 
@@ -363,36 +362,27 @@ the runtime guide already recommends.
   absolute imports, rare explicit `import ... as ...`, no wildcard imports, and
   import-linter contracts.
 
-## Open Questions For Writing
+## Questions Resolved By The Active Plan
 
-These questions still affect guide drafting:
+These questions shaped the reconciliation pass. `porting-plan.md` carries the
+current decisions for guide writing:
 
-1. Should the first design pass include a dedicated dataframe and pipeline
-   guide, or should dataframe guidance stay as short sections inside
-   declarative style, types, testing, and performance until the first guide set
-   proves it needs its own file?
-2. Should structured concurrency default to stdlib `asyncio.TaskGroup` for a
-   no-dependency baseline, with anyio as the advanced option, or should anyio be
-   the recommended default for applications that do meaningful concurrency?
-3. Should the logging default in new applications be loguru for ergonomics,
-   structlog for parseable logs, or stdlib logging for portability? The current
-   policy table in `porting-plan.md` resolves this by project type, but the
-   logging guide should make the decision tree explicit.
-4. How strongly should the guide recommend global strict typing on day one
-   versus a directory-by-directory ratchet? The plan sets global strict as the
-   target and ratcheting as the migration method.
-5. Should the agent examples file include dataframe-specific good/bad pairs
-   from factors2, or should examples stay domain-neutral until the
-   repo-specific agent skill exists?
-6. How much free-threaded Python material belongs in the first pass? It affects
-   runtime, invariants, performance, and static-analysis guidance, but it should
-   not dominate guidance for normal CPython deployments.
+1. The first pass includes a dedicated dataframe and pipeline guide because the
+   reference codebase is dataframe-heavy.
+2. Structured concurrency defaults to stdlib `asyncio.TaskGroup`, with anyio as
+   the option when cancel scopes, timeout composition, or trio compatibility
+   earn the dependency.
+3. Logging policy is selected by project surface: stdlib logging for libraries,
+   loguru for applications, and structlog for strict key/value logs.
+4. Strict typing is the target state; existing code may ratchet by package or
+   directory.
+5. Agent examples should use factors2 evidence where it illustrates a
+   domain-neutral Python rule.
+6. Free-threaded Python belongs as caveats in runtime, invariants, performance,
+   and static-analysis guidance.
 
 ## Writing Consequences
 
-Use this artifact as the C++ source consolidation for the next porting steps.
-The next consolidation artifact should combine this source map with modern
-Python research and factors2 observations into
-`work-in-progress/exploration/exploration.md`. Durable guides should not link
-to this file; they should absorb the stable guidance and cite durable sources
-or final guide structure instead.
+Use this artifact as the C++ source consolidation behind `porting-plan.md`.
+Durable guides should not link to this file; they should absorb the stable
+guidance and cite durable sources or final guide structure instead.
