@@ -14,10 +14,51 @@ profilers, and runtime diagnostics.
 
 ## Current State
 
-Phase 4 is complete. The duplicate plan drafts and pre-consolidation
-exploration files are superseded by this plan and the research inventory below.
+Phase 4 is complete. The durable writing pass is complete. The duplicate plan
+drafts and pre-consolidation exploration files are superseded by this plan, the
+research inventory below, and the produced durable guides.
 
-Next action: start the durable writing pass at Batch 1.
+The durable guide set now includes:
+
+- `python-projects-and-tooling/`
+- `python-design-principles/`
+- `python-testing-principles/`
+- `python-debugging-principles/`
+- `agent/`
+- Root `README.md`
+
+Verification for the produced guides checks:
+
+- no links to temporary research paths;
+- ASCII-only scan clean;
+- `git diff --check` clean.
+
+Next action: review the complete guide set as a reader, then package the
+repo-specific agent skill when the guide set stabilizes.
+
+## Handoff Notes
+
+Use the Batch 1 guides as the vocabulary base for later guides. They establish
+the durable policy for `src/` layout, uv command surfaces, Ruff as lint and
+format, Pyright as the default type checker, Python 3.14 as the new-project
+baseline, and gradual typing focused on public surfaces, domain values,
+adapters, reusable helpers, and dataframe boundaries.
+
+Batch 2 created `python-design-principles/` and wrote:
+
+- `python-design-principles/architecture.md`
+- `python-design-principles/types-and-correctness.md`
+- `python-design-principles/comments-and-docstrings.md`
+- `python-design-principles/declarative-style.md`
+- `python-design-principles/error-handling.md`
+
+Keep the error-handling guide exception-first. Use the focused error-handling
+pass in this plan as the policy source, and avoid presenting C++ Result, LEAF,
+or `std::expected` as default Python practice.
+
+Keep durable guides free of links to temporary research files. Pull stable
+reasoning into the guide prose, and cite durable project files or external
+sources only when a citation is useful.
 
 ## Research Inventory
 
@@ -96,11 +137,11 @@ Conditional outputs:
 
 | Topic | Default |
 |---|---|
-| Python version | Python 3.13 baseline, Python 3.14 forward target. |
-| Type checker | Pyright by default; pyrefly as the fast alternative; mypy as an existing-project fallback. |
-| Strict typing | Strict checking is the target state; adoption may ratchet by package or directory. |
+| Python version | Python 3.14 baseline. Treat Python 3.13 compatibility as a migration concern for existing projects. |
+| Type checker | Pyright by default; mypy alongside it when plugin support or existing CI earns the cost; ty or pyrefly as fast alternatives after project-level evaluation. |
+| Strict typing | Use a middle-ground default: typed public surfaces, domain values, adapters, and reusable helpers; stricter checking by package or directory where it catches real defects without distorting dynamic Python. |
 | Package workflow | uv workspaces, locked installs, and `uv run` command surfaces. |
-| Lint and format | Ruff for linting and formatting. |
+| Lint and format | Ruff for linting and formatting, including type-adjacent hygiene rules. Ruff complements the type checker; it is not the semantic type checker. |
 | Data carriers | Frozen slotted dataclasses for internal value objects; mutable aggregates when mutation is the domain operation; Pydantic v2 at trust boundaries; Pandera at dataframe boundaries. |
 | Error handling | Idiomatic Python exceptions inside a domain; built-in exceptions when they communicate the failure clearly; custom exceptions only for meaningful domain failures or boundary translation. |
 | Boundary failures | Translate failures explicitly at HTTP, CLI, job, queue, worker, and UI boundaries. |
@@ -217,7 +258,7 @@ Create these guides in the first writing pass:
 Each batch can be written in parallel. Later batches may cite vocabulary
 created by earlier batches.
 
-### Batch 1: Project Vocabulary
+### Batch 1: Project Vocabulary (Complete)
 
 1. `python-projects-and-tooling/project-layout.md`
 2. `python-projects-and-tooling/tooling-baseline.md`
@@ -232,6 +273,8 @@ Primary sources: `MONOREPO.md`, `exploration.md`, `antipatterns.md`,
 `cpp-claude/research/typecheckers-2026.md`.
 
 ### Batch 2: Design Foundations
+
+Complete.
 
 4. `python-design-principles/architecture.md`
 5. `python-design-principles/types-and-correctness.md`
@@ -255,6 +298,8 @@ Primary sources: `cpp-source-python-port.md`, `exploration.md`,
 
 ### Batch 3: Design Specifics
 
+Complete.
+
 9. `python-design-principles/functional-programming.md`
 10. `python-design-principles/generics-and-protocols.md`
 11. `python-design-principles/decorators-and-metaprogramming.md`
@@ -276,6 +321,8 @@ Primary sources: `cpp-source-python-port.md`, `exploration.md`,
 
 ### Batch 4: Runtime, Performance, And Data
 
+Complete.
+
 16. `python-design-principles/runtime-and-concurrency.md`
 17. `python-design-principles/performance.md`
 18. `python-design-principles/data-pipeline-and-dataframes.md`
@@ -292,6 +339,8 @@ Primary sources: `cpp-source-python-port.md`, `exploration.md`,
 `factors-claude/patterns/pydantic-pandera-dataclasses.md`.
 
 ### Batch 5: Testing
+
+Complete.
 
 19. `python-testing-principles/philosophy.md`
 20. `python-testing-principles/pytest-conventions.md`
@@ -312,6 +361,8 @@ Primary sources: `cpp-source-python-port.md`, `exploration.md`,
 
 ### Batch 6: Debugging
 
+Complete.
+
 26. `python-debugging-principles/root-cause-tracing.md`
 27. `python-debugging-principles/defense-in-depth.md`
 28. `python-debugging-principles/logging.md`
@@ -326,6 +377,8 @@ Primary sources: `cpp-source-python-port.md`, `exploration.md`,
 `factors-claude/tooling-baseline.md`.
 
 ### Batch 7: Agent Context And READMEs
+
+Complete.
 
 30. `agent/python-agent-context.md`
 31. `agent/python-agent-examples.md`
@@ -343,8 +396,8 @@ Use these notes to keep each guide scoped:
 | Guide | Scope |
 |---|---|
 | `project-layout.md` | `src/` layout, uv workspaces, child `pyproject.toml` files, monorepo boundaries, package layering, and generated artifact placement. |
-| `tooling-baseline.md` | uv, Ruff, Pyright, pre-commit, CI command surface, security scanners, dependency groups, CODEOWNERS, PR templates, and development dependency policy. |
-| `python-version-and-typing-stack.md` | Python 3.13 baseline, Python 3.14 target, PEP 695, PEP 649 implications, Pyright vs pyrefly, and mypy fallback. |
+| `tooling-baseline.md` | uv, Ruff, Pyright, optional mypy, pre-commit, CI command surface, security scanners, dependency groups, CODEOWNERS, PR templates, and development dependency policy. |
+| `python-version-and-typing-stack.md` | Python 3.14 baseline, migration notes for Python 3.13 projects, PEP 695, PEP 649 implications, Pyright defaults, optional mypy, and fast-checker alternatives such as ty or pyrefly. |
 | `architecture.md` | Domain ownership, adapters, import DAGs, functional core, imperative shell, and testability without framework mocks. |
 | `types-and-correctness.md` | Static typing, `NewType`, dataclasses, Pydantic, Pandera, discriminated unions, `assert_never`, `Any`, `cast`, and type-ignore policy. |
 | `comments-and-docstrings.md` | Present-tense comments, positive phrasing, precondition comments, Google-style docstrings, and the negative-documentation anti-pattern. |
@@ -370,7 +423,7 @@ Use these notes to keep each guide scoped:
 | `root-cause-tracing.md` | Trace bad values backward, read chained and grouped tracebacks, use focused probes, isolate flaky tests, and fix the origin. |
 | `defense-in-depth.md` | Boundary parsing, domain validation, environment guards, assertions for internal impossibility, runtime checks, and diagnostic layering. |
 | `logging.md` | One logging stack, stable messages, structured fields, disabled-level cost, `logger.exception` at stopping boundaries, and no log-and-reraise. |
-| `static-analysis-and-runtime-checks.md` | Pyright, pyrefly, Ruff, pytest warnings, `python -X dev`, asyncio debug mode, faulthandler, tracemalloc, memray, py-spy, and suppression policy. |
+| `static-analysis-and-runtime-checks.md` | Pyright, optional mypy, ty or pyrefly evaluation, Ruff lint rules, pytest warnings, `python -X dev`, asyncio debug mode, faulthandler, tracemalloc, memray, py-spy, and suppression policy. |
 | `python-agent-context.md` | Always-loaded rule sheet: package layout, domain ownership, import DAGs, typing, exceptions, pytest, debugging, tooling, and comments. |
 | `python-agent-examples.md` | Good and bad Python pairs keyed to the agent-context sections, grounded in factors2 evidence where useful. |
 
@@ -413,8 +466,9 @@ Before calling the first writing pass done:
 
 ## Deferred Work
 
-- Re-survey Pyright, pyrefly, ty, and mypy before freezing long-lived tool
-  comparisons in durable documentation.
+- Re-survey Pyright, ty, pyrefly, and mypy before freezing long-lived tool
+  comparisons in durable documentation. Keep Ruff positioned as lint and
+  format, with type-adjacent checks handled as lint rules.
 - Validate the Ruff baseline against a representative project.
 - Add `web-ui.md` only after there is enough web UI testing material to justify
   it.
