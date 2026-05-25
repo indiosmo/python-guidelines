@@ -49,9 +49,53 @@ When durable guides are written, do not link to `work-in-progress/` from those
 guides. Pull the needed reasoning into the durable guide, or link only to
 durable sources.
 
+## Handoff
+
+Current pickup point: start consolidation step 4. The three consolidated
+exploration artifacts now exist and should be used to reconcile this plan
+before durable guide writing starts.
+
+Work completed:
+
+- Consolidation step 1 is complete.
+- `work-in-progress/exploration/cpp-source-python-port.md` now consolidates
+  the duplicated C++ exploration from `cpp-claude/` and `cpp-codex/`.
+- The artifact covers purpose and source coverage, the C++ guide disposition
+  map, common topic maps, Python replacements for C++ mechanisms, deliberate
+  Python deviations, research notes to preserve, dropped or conditional topics,
+  open writing questions, and writing consequences.
+- Verification run for step 1: `git diff --check`, ASCII-only scan, and a
+  heading check for the required sections.
+- Consolidation step 2 is complete.
+- `work-in-progress/exploration/exploration.md` now consolidates the C++ source
+  map, modern Python tooling and typing research, and factors2 exploration.
+- The artifact covers purpose and baseline, the modern Python baseline,
+  architecture and boundaries, typing and models, testing and debugging,
+  operations and reliability, the promote and avoid table, and open decisions.
+- Consolidation step 3 is complete.
+- `work-in-progress/exploration/antipatterns.md` now consolidates the Claude,
+  Codex, and factors2 anti-pattern passes.
+- The artifact covers selection rules, package boundaries, configuration and
+  process-global state, data and type contracts, dynamic dispatch, mutation and
+  dataframe ownership, SQL and text-to-code workflows, error handling and
+  logging, concurrency, testing, documentation hygiene, tooling-policy items,
+  and durable guide placement.
+- Verification run for step 3: `git diff --check`, explicit untracked-file
+  whitespace check, ASCII-only scan, required heading check, and matching
+  counts for anti-pattern entries and status classifications.
+
+Next action:
+
+- Reconcile this plan using `work-in-progress/plan/final-plan.md`,
+  `work-in-progress/plan-codex/python-guidelines-port-plan.md`, and the three
+  consolidated exploration artifacts.
+
 ## Consolidation Work
 
 ### 1. Consolidate duplicated C++ exploration
+
+Status: complete. The output is
+`work-in-progress/exploration/cpp-source-python-port.md`.
 
 Create `work-in-progress/exploration/cpp-source-python-port.md`.
 
@@ -76,6 +120,9 @@ Use `cpp-codex/00-summary.md` as the narrative spine. Fold in the richer
 `cpp-claude/00-summary.md`.
 
 ### 2. Consolidate Python research and factors2 exploration
+
+Status: complete. The output is
+`work-in-progress/exploration/exploration.md`.
 
 Create `work-in-progress/exploration/exploration.md`.
 
@@ -102,6 +149,9 @@ Shape:
 - Open decisions that remain after consolidation.
 
 ### 3. Consolidate anti-patterns
+
+Status: complete. The output is
+`work-in-progress/exploration/antipatterns.md`.
 
 Create `work-in-progress/exploration/antipatterns.md`.
 
