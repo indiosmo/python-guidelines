@@ -35,10 +35,12 @@ Use built-in collection generics, `X | None`, `type` aliases, and PEP 695 type
 parameters. Use type parameter defaults when they simplify a real public API,
 not to make local code generic by habit.
 
-Python 3.14 uses deferred annotation evaluation. Code that targets Python 3.14
-does not need quoted annotations solely to avoid eager name lookup. Runtime
-annotation consumers should use supported inspection APIs instead of assuming
-raw `__annotations__` contains evaluated runtime objects.
+Python 3.14 uses PEP 649 deferred annotation evaluation. New Python 3.14 code
+can use direct annotations without quoting names solely to avoid eager
+annotation evaluation. `TYPE_CHECKING` blocks still matter for import cycles
+and runtime import cost. Runtime annotation consumers should use supported
+inspection APIs instead of assuming raw `__annotations__` contains evaluated
+runtime objects.
 
 ## Type Checker Policy
 
@@ -144,4 +146,3 @@ For existing Python 3.13 projects, adopt the stack in layers:
 
 Migration should improve review and defect detection without freezing dynamic
 areas that are clearer as Python.
-

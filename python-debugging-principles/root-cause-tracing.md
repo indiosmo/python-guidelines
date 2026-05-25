@@ -152,10 +152,11 @@ Check these sources first:
   workers.
 - Dataframe global options and library-level configuration.
 
-When the suite order matters, reproduce with a fixed order or plugin seed when
-the project has one. Then bisect the smallest set of tests that creates the
-pollution and the smallest test that observes it. The fix usually belongs in a
-fixture, context manager, startup boundary, or explicit dependency object.
+When the suite order matters, reproduce with a fixed order or a
+`pytest-randomly` seed when the project uses one. Then bisect the smallest set
+of tests that creates the pollution and the smallest test that observes it. The
+fix usually belongs in a fixture, context manager, startup boundary, or
+explicit dependency object.
 
 ## Keep Observability Low-Perturbation
 

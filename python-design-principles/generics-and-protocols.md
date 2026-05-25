@@ -38,6 +38,15 @@ class InMemoryRepository[T]:
         return self._items.get(item_id)
 ```
 
+Use PEP 696 type parameter defaults when they reduce public API boilerplate:
+
+```python
+class Page[T = str]:
+    items: tuple[T, ...]
+```
+
+Avoid default type parameters in local code that has one concrete caller.
+
 Add bounds when the body relies on a capability:
 
 ```python

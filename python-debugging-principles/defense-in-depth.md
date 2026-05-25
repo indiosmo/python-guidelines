@@ -126,8 +126,8 @@ def annualization_factor(period: SeriesPeriod) -> int:
             return 12
         case SeriesPeriod.QUARTERLY:
             return 4
-
-    assert_never(period)
+        case _ as unreachable:
+            assert_never(unreachable)
 ```
 
 Assertions and `assert_never` are useful when the type checker and the runtime

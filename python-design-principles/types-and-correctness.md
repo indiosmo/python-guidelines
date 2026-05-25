@@ -71,6 +71,11 @@ def parse_order_request(payload: object) -> OrderRequest:
 The parser checks hostile input once. The domain signature then carries the
 roles forward.
 
+`NewType` helps static checkers preserve identity-only distinctions while
+leaving the runtime value unchanged. Use a validated class, dataclass,
+Pydantic model, or `Annotated` boundary type when construction must prove a
+rule.
+
 ## Data Carriers
 
 Choose one record style for the boundary:
@@ -198,6 +203,9 @@ class SignalStrategy(BaseModel):
 
 Dynamic discovery fits open plugin systems. A reviewed union fits supported
 variants that define the project's stable configuration contract.
+
+Large tagged unions can become verbose. A `StrEnum` plus a payload object can
+be clearer when variants share most fields.
 
 ## Protocols And Callables
 

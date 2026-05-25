@@ -115,6 +115,28 @@ Enumerate meaningful input shapes: ascending, descending, constant, zero,
 mixed length, missing values, duplicates, and unsorted rows when those matter
 to the contract.
 
+## Property-Based Tests
+
+Use Hypothesis when the contract is an invariant over many inputs. Good fits
+include parser round trips, state-machine transitions, dataframe shape
+invariants, serialization contracts, and domain validation rules with many
+equivalent examples.
+
+Keep generated examples domain-shaped and shrinkable. Pair property tests with
+small literal examples that document the rule:
+
+```python
+from hypothesis import given
+from hypothesis import strategies as st
+
+
+@given(st.integers(min_value=1, max_value=1_000_000))
+def test_quantity_round_trip(quantity: int) -> None:
+    encoded = encode_quantity(quantity)
+
+    assert parse_quantity(encoded) == quantity
+```
+
 ## One Rule Per Validation Test
 
 Validation suites read well when each test starts from a valid object and

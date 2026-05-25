@@ -74,7 +74,7 @@ A useful first-pass rule set includes:
   maintainability checks.
 - `PT` for pytest conventions.
 - `ASYNC` for event-loop hazards.
-- `TID` and `TCH` for import and type-checking hygiene.
+- `TID` and `TC` for import and type-checking hygiene.
 - `S` for security checks, tuned to project context.
 - `T20` to keep `print` out of production code.
 - `ARG` for unused arguments, with test-specific relaxations.
@@ -107,8 +107,16 @@ Use pytest as the correctness test runner. Configure test discovery explicitly:
 ```toml
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+addopts = ["--import-mode=importlib"]
 ```
+
+`uv sync` installs the project and workspace members as editable packages by
+default when the project has a build system. `--import-mode=importlib` keeps
+pytest from changing `sys.path` for test module imports and is the recommended
+mode for new projects. Use `pythonpath = ["src"]` only when the project
+intentionally tests the local source tree directly instead of the editable
+install. A release or packaging check should test the built or installed
+artifact when packaging correctness matters.
 
 Use marks, node IDs, file paths, and `-k` expressions for focused loops. Keep
 benchmarks outside normal test discovery and run them with an explicit command
@@ -144,7 +152,7 @@ target unless the project has measured that pre-commit remains fast enough.
 CI should run the same command families developers run locally:
 
 ```sh
-uv sync --locked --all-extras --dev
+uv sync --locked --all-extras
 uv run ruff format --check .
 uv run ruff check .
 uv run pyright
@@ -156,6 +164,12 @@ security scanning for dependency and secret exposure, coverage gates for
 mature packages, package metadata checks, import-boundary checks, and scheduled
 benchmarks.
 
+Projects with non-default dependency groups should name them explicitly:
+
+```sh
+uv sync --locked --all-extras --group docs --group benchmark
+```
+
 Cache dependency downloads by the lockfile. Pin tool versions where the tool
 is installed outside the lockfile, and keep pre-commit, local commands, and CI
 on the same versions.
@@ -166,4 +180,3 @@ Use CODEOWNERS, pull request templates, and issue templates when they improve
 review routing and capture recurring context. Keep templates short. They
 should ask for behavior, risk, tests, rollout notes, and screenshots or
 artifacts only when those apply to the project.
-

@@ -101,6 +101,9 @@ Use this shape when the operation's contract covers every supported variant.
 For open extension points, use registration, protocols, or plugin discovery
 instead of pretending the set is closed.
 
+Large literal-tagged dataclass unions can become verbose. A `StrEnum` plus a
+payload object can be clearer when variants share most fields.
+
 ## Higher-Order Functions
 
 Pass behavior as a value when the behavior is a small policy, predicate,

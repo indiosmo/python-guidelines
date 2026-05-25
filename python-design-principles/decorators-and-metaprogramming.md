@@ -74,6 +74,19 @@ Keep decorators small. A decorator that parses configuration, opens clients,
 registers plugins, handles errors, and emits metrics is several policies
 hidden behind one line.
 
+Use PEP 702 `warnings.deprecated` for supported APIs that are being retired.
+It gives static tools a deprecation signal and can emit a runtime
+`DeprecationWarning`.
+
+```python
+from warnings import deprecated
+
+
+@deprecated("use compute_weighted_signals instead")
+def compute_signals(frame: SignalFrame) -> SignalFrame:
+    return compute_weighted_signals(frame)
+```
+
 ## Registration Decorators
 
 Registration decorators fit catalogs of strategies, commands, checks, or

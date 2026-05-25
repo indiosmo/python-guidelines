@@ -23,8 +23,16 @@ Configure discovery and import roots explicitly:
 ```toml
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+addopts = ["--import-mode=importlib"]
 ```
+
+For projects with a build system, `uv sync` installs the project and workspace
+members as editable packages by default. `--import-mode=importlib` keeps pytest
+from changing `sys.path` for test module imports and works well for new
+projects. Use `pythonpath = ["src"]` only when the project intentionally tests
+the local source tree directly instead of the editable install. When packaging
+correctness matters, add a release check that tests the built or installed
+artifact.
 
 Keep long-running benchmarks under `benchmarks/` and run them through an
 explicit command:
@@ -149,11 +157,21 @@ Register marks in pytest configuration so typos fail loudly:
 
 ```toml
 [tool.pytest.ini_options]
+strict_config = true
+strict_markers = true
+strict_xfail = true
+filterwarnings = [
+    "error",
+]
 markers = [
     "integration: crosses a real boundary",
     "slow: outside the normal fast correctness loop",
 ]
 ```
+
+For pytest 9 and locked pytest versions, `strict = true` can carry the same
+strictness policy in one option. Add targeted warning ignores only after the
+warning source is triaged.
 
 Use file paths, node IDs, marks, and `-k` for focused loops:
 
@@ -173,6 +191,10 @@ Development dependencies should earn their place through tests, CI, or a
 documented command. Remove unused plugins so the test environment stays
 understandable.
 
+Use `pytest-cov` when coverage is a project policy or release gate. Prefer
+branch coverage for mature packages, and treat `fail_under` as a ratchet for
+stable code rather than a substitute for meaningful assertions.
+
 ## Parallel Runs
 
 Use `pytest-xdist` after the suite isolates process-global state, temporary
@@ -183,6 +205,12 @@ not create order dependence.
 Prefer deterministic per-test resources over serializing the whole suite. Use
 serialization only for tests whose behavior inherently depends on one
 process-wide resource.
+
+Use `pytest-randomly` or a similar plugin as a diagnostic tool for hidden
+inter-test dependencies. Record the seed in failure output so order-dependent
+failures can be reproduced. Enable randomized order after process-global
+state, temporary paths, ports, databases, and random seeds are isolated well
+enough for useful failures.
 
 ## Command Surface
 

@@ -50,7 +50,7 @@ fragile code before it reaches runtime:
 - `ASYNC` for event-loop mistakes.
 - `T20` for production `print` calls.
 - `PT` for pytest patterns that affect test diagnosis.
-- `TID` and `TCH` for import and type-checking hygiene.
+- `TID` and `TC` for import and type-checking hygiene.
 - `S` for security-sensitive patterns, tuned to the project.
 - `NPY` and `PD` for NumPy and pandas projects.
 

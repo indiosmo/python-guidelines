@@ -72,6 +72,10 @@ queue that owns the synchronization.
 For `asyncio`, prefer `asyncio.Event`, `asyncio.Queue`, task completion, and
 `asyncio.wait_for` over sleep loops.
 
+Async tests need a pytest runner plugin. Use `pytest-asyncio` when the project
+standardizes on `asyncio`, and use AnyIO's pytest plugin when tests need AnyIO
+or Trio compatibility.
+
 ```python
 async def test_consumer_receives_message() -> None:
     messages: asyncio.Queue[Message] = asyncio.Queue()

@@ -61,7 +61,7 @@ class RateRequest(BaseModel):
 
 class Rates(pa.DataFrameModel):
     trade_date: Series[pa.DateTime]
-    rate: Series[float]
+    rate: Series[pa.Float64]
 ```
 
 After parsing, downstream code should use domain names such as `trade_date`,
@@ -83,8 +83,8 @@ class WeightedSignals(pa.DataFrameModel):
     trade_date: Series[pa.DateTime]
     symbol: Series[str]
     side: Series[str]
-    score: Series[float]
-    weight: Series[float] = pa.Field(ge=-1.0, le=1.0)
+    score: Series[pa.Float64]
+    weight: Series[pa.Float64] = pa.Field(ge=-1.0, le=1.0)
 ```
 
 Annotate signatures with schema types when they clarify the contract:
@@ -233,6 +233,26 @@ def test_compute_score_ranks_by_trade_date(observations):
         }
     )
     assert_frame_equal(actual.reset_index(drop=True), expected)
+```
+
+For Polars, use its testing helpers:
+
+```python
+import polars as pl
+from polars.testing import assert_frame_equal
+
+
+def test_compute_score_ranks_by_trade_date(observations):
+    actual = compute_score(observations)
+    expected = pl.DataFrame(
+        {
+            "trade_date": ["2026-01-02", "2026-01-02"],
+            "symbol": ["AAA", "BBB"],
+            "score": [1.0, 2.0],
+        }
+    )
+
+    assert_frame_equal(actual, expected)
 ```
 
 Use approval tests for large generated SQL, reports, JSON, or configuration

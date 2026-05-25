@@ -46,6 +46,10 @@ Log and stop or translate at boundaries such as CLI commands, HTTP handlers,
 worker loops, and scheduled jobs. Inside a domain function, raise the domain
 exception with useful context and let the boundary decide how to report it.
 
+For structlog, `structlog.contextvars` fits request-scoped fields in web and
+async applications. Bind validated request context at the boundary so later
+log calls carry the same correlation identifiers.
+
 ## Context-Local Facades
 
 `ContextVar` fits services that need scoped override without threading a handle

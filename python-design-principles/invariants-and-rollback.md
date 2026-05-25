@@ -145,7 +145,7 @@ they should be the owned source of truth. A public dataframe beside a public
 derived dictionary creates two mutable truths.
 
 ```python
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class MarketPriceLookup:
     prices: tuple[MarketPrice, ...]
 
